@@ -21,17 +21,20 @@ public class Cliente {
     private Long id;
 
     @Column(nullable = false)
-    public String name;
+    private String nome;
 
     @Column(unique = true, nullable = false)
-    public String documento;
+    private String documento;
 
-    public String telefone;
+    private String telefone;
 
     @Column(unique = true)
-    public String email;
+    private String email;
+
+    private boolean ativo = true;
 
     @OneToMany
-    @JoinColumn(name = "enderecoId")
-    public List<Endereco> endereco = new ArrayList<>();
+    @JoinColumn(name = "cliente_id")
+    private List<Endereco> enderecos = new ArrayList<>();
+
 }
