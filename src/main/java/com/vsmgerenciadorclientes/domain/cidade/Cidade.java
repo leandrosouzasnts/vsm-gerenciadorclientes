@@ -15,11 +15,11 @@ public class Cidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String nome;
+    private String nome;
 
-    public String uf;
+    private String uf;
 
     public Cidade(CidadeDTO cidadeDTO){
         this.nome = cidadeDTO.nome();
