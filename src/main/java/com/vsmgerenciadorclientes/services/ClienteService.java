@@ -4,6 +4,7 @@ import com.vsmgerenciadorclientes.domain.cliente.Cliente;
 import com.vsmgerenciadorclientes.domain.endereco.Endereco;
 import com.vsmgerenciadorclientes.repositories.ClienteRepository;
 import com.vsmgerenciadorclientes.repositories.EnderecoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class ClienteService {
     public void inactivateCliente(Long clienteId) throws Exception {
         Optional<Cliente> cliente = this.clienteRepository.findById(clienteId);
 
-        if (!cliente.isPresent()) throw new Exception("Cliente não encontrado");
+        if (!cliente.isPresent()) throw new EntityNotFoundException("Cliente não encontrado");
 
         cliente.get().setAtivo(false);
 
@@ -50,7 +51,7 @@ public class ClienteService {
     public void activateCliente(Long clienteId) throws Exception {
         Optional<Cliente> cliente = this.clienteRepository.findById(clienteId);
 
-        if (!cliente.isPresent()) throw new Exception("Cliente não encontrado");
+        if (!cliente.isPresent()) throw new EntityNotFoundException("Cliente não encontrado");
 
         cliente.get().setAtivo(true);
 
@@ -58,14 +59,14 @@ public class ClienteService {
     }
 
     public Cliente getById(Long clienteId) throws Exception {
-        return this.clienteRepository.findById(clienteId).orElseThrow(() -> new Exception("Cliente não encontrado"));
+        return this.clienteRepository.findById(clienteId).orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
     }
 
     public Cliente getByDocumento(String documento) throws Exception{
 
         Cliente cliente = this.clienteRepository.findByDocumento(documento);
         if (cliente == null) {
-            throw new Exception("Cliente não encontrado");
+            throw new EntityNotFoundException("Cliente não encontrado");
         }
         return cliente;
     }
