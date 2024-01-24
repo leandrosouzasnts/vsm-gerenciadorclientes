@@ -1,6 +1,6 @@
 package com.vsmgerenciadorclientes.domain.endereco;
 
-import com.vsmgerenciadorclientes.domain.cidade.Cidade;
+import com.vsmgerenciadorclientes.domain.cliente.Cliente;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,17 +15,18 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String logradouro;
+    private String logradouro;
 
-    public String numero;
+    private String numero;
 
-    public String bairro;
+    private String bairro;
 
-    public String cep;
+    private String cep;
 
-    @ManyToOne
-    @JoinColumn(name = "cidadeId")
-    public Cidade cidade;
+    private Long cidadeId;
+
+    @Column(name = "cliente_id")
+    private Long clienteId;
 }
